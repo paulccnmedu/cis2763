@@ -1,0 +1,34 @@
+/*
+Theme Name: Midterm Theme
+Description: Demonstrate HTML layout of templates and use of sidebar to support widgets. Includes navigation menu.
+*/
+/* HTML Layout */
+#wrapper {
+	background-color:#eee;
+}
+main {
+	float: left;
+	background-color:#ccc;
+	width:70%;
+}
+#sidebar {
+	float: right;
+	
+}
+
+/* https://stackoverflow.com/questions/8554043/what-is-a-clearfix */
+/* clear floats */
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+/* remove the bullets from the menu list items */
+.my_header_menu_class ul {
+	list-style-type: none;
+}
+.my_header_menu_class ul li {
+	display: inline-block;
+}
