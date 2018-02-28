@@ -1,0 +1,48 @@
+2018-02-27T17:23:36+00:00 CRITICAL Uncaught Error: Call to undefined function the_thumbnail() in /var/www/html/wordpress/wp-content/themes/midterm/template-parts/post/content-celebrity.php:3
+Stack trace:
+#0 /var/www/html/wordpress/wp-includes/template.php(690): require()
+#1 /var/www/html/wordpress/wp-includes/template.php(647): load_template('/var/www/html/w...', false)
+#2 /var/www/html/wordpress/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /var/www/html/wordpress/wp-content/themes/midterm/category-celebrity.php(17): get_template_part('template-parts/...', 'celebrity')
+#4 /var/www/html/wordpress/wp-includes/template-loader.php(74): include('/var/www/html/w...')
+#5 /var/www/html/wordpress/wp-blog-header.php(19): require_once('/var/www/html/w...')
+#6 /var/www/html/wordpress/index.php(17): require('/var/www/html/w...')
+#7 {main}
+  thrown
+
+2018-02-27T17:24:31+00:00 CRITICAL Uncaught Error: Call to undefined function the_thumbnail() in /var/www/html/wordpress/wp-content/themes/midterm/template-parts/post/content-celebrity.php:3
+Stack trace:
+#0 /var/www/html/wordpress/wp-includes/template.php(690): require()
+#1 /var/www/html/wordpress/wp-includes/template.php(647): load_template('/var/www/html/w...', false)
+#2 /var/www/html/wordpress/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /var/www/html/wordpress/wp-content/themes/midterm/category-celebrity.php(17): get_template_part('template-parts/...', 'celebrity')
+#4 /var/www/html/wordpress/wp-includes/template-loader.php(74): include('/var/www/html/w...')
+#5 /var/www/html/wordpress/wp-blog-header.php(19): require_once('/var/www/html/w...')
+#6 /var/www/html/wordpress/index.php(17): require('/var/www/html/w...')
+#7 {main}
+  thrown
+
+2018-02-27T17:24:33+00:00 CRITICAL Uncaught Error: Call to undefined function the_thumbnail() in /var/www/html/wordpress/wp-content/themes/midterm/template-parts/post/content-celebrity.php:3
+Stack trace:
+#0 /var/www/html/wordpress/wp-includes/template.php(690): require()
+#1 /var/www/html/wordpress/wp-includes/template.php(647): load_template('/var/www/html/w...', false)
+#2 /var/www/html/wordpress/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /var/www/html/wordpress/wp-content/themes/midterm/category-celebrity.php(17): get_template_part('template-parts/...', 'celebrity')
+#4 /var/www/html/wordpress/wp-includes/template-loader.php(74): include('/var/www/html/w...')
+#5 /var/www/html/wordpress/wp-blog-header.php(19): require_once('/var/www/html/w...')
+#6 /var/www/html/wordpress/index.php(17): require('/var/www/html/w...')
+#7 {main}
+  thrown
+
+2018-02-27T17:25:01+00:00 CRITICAL Uncaught Error: Call to undefined function the_thumbnail() in /var/www/html/wordpress/wp-content/themes/midterm/template-parts/post/content-celebrity.php:3
+Stack trace:
+#0 /var/www/html/wordpress/wp-includes/template.php(690): require()
+#1 /var/www/html/wordpress/wp-includes/template.php(647): load_template('/var/www/html/w...', false)
+#2 /var/www/html/wordpress/wp-includes/general-template.php(155): locate_template(Array, true, false)
+#3 /var/www/html/wordpress/wp-content/themes/midterm/category-celebrity.php(17): get_template_part('template-parts/...', 'celebrity')
+#4 /var/www/html/wordpress/wp-includes/template-loader.php(74): include('/var/www/html/w...')
+#5 /var/www/html/wordpress/wp-blog-header.php(19): require_once('/var/www/html/w...')
+#6 /var/www/html/wordpress/index.php(17): require('/var/www/html/w...')
+#7 {main}
+  thrown
+
