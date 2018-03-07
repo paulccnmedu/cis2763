@@ -14,3 +14,4 @@ function theme_enqueue_styles() {
 //
 // Your code goes below
 //
+require_once get_stylesheet_directory() . '/woocommerce/woo-functions.php';

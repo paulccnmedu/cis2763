@@ -58,7 +58,18 @@ if ( post_password_required() ) {
 			 * @hooked woocommerce_template_single_sharing - 50
 			 * @hooked WC_Structured_Data::generate_product_data() - 60
 			 */
-			do_action( 'woocommerce_single_product_summary' );
+			//do_action( 'woocommerce_single_product_summary' );
+			
+			do_action( 'cis_single_title_woocommerce_single_product_summary');
+			do_action( 'cis_single_excerpt_woocommerce_single_product_summary' );
+			//do_action( 'cis_single_rating_woocommerce_single_product_summary' );
+			do_action( 'cis_single_price_woocommerce_single_product_summary' );
+			
+			do_action( 'cis_single_meta_woocommerce_single_product_summary' );
+			do_action( 'cis_single_sharing_woocommerce_single_product_summary' );
+			do_action( 'cis_single_add_to_cart_woocommerce_single_product_summary');
+			
+			
 		?>
 	</div>
 
