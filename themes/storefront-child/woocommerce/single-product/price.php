@@ -21,8 +21,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+global $post;
+$discount = 10;
+$discountvalue = (100 - $discount)/100;
+$regular_price = $product->regular_price;
+$discount_price = $discountvalue*$product->regular_price;
+$save = $regular_price - $discount_price;
 
 ?>
-<p class="price"><?php echo $product->get_price_html(); ?>
-<br>Members have 10% discount!
+<p class="price">
+<?php 
+//echo $product->get_price_html(); 
+if( (!is_user_logged_in())) { 
+	?>
+	<?php echo $product->get_price_html(); ?>
+	<span class = "cis_member_price">Member Price: $
+	<?php 
+	echo number_format($discount_price,2);
+	?>
+	</span>
+<?php
+}
+if( (is_user_logged_in())) {
+	echo number_format($discount_price,2);
+	echo '<br>Members save $'.number_format($save,2);
+}
+?>
 </p>

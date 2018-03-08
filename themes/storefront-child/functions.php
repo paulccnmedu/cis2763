@@ -10,6 +10,8 @@ function theme_enqueue_styles() {
         get_stylesheet_directory_uri() . '/style.css',
         array('storefront-style')
     );
+	wp_register_style('woo-style', get_stylesheet_directory_uri() . '/woocommerce/woo-style.css');
+	wp_enqueue_style('woo-style');
 }
 //
 // Your code goes below
