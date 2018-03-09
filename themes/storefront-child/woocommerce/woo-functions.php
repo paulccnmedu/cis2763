@@ -28,7 +28,7 @@ function sv_change_product_price_display( $price ) {
 //
 //
 // add shipping phone to  the checkout page
-//add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
 
 // Our hooked in function - $fields is passed via the filter!
 function custom_override_checkout_fields( $fields ) {
@@ -39,6 +39,15 @@ function custom_override_checkout_fields( $fields ) {
     'class'     => array('form-row-wide'),
     'clear'     => true
      );
+     $fields['shipping']['shipping_planet'] = array(
+        'label'     => __('Planet', 'woocommerce'),
+    'placeholder'   => _x('Planet', 'placeholder', 'woocommerce'),
+    'required'  => false,
+    'class'     => array('form-row-wide'),
+    'clear'     => true
+     );
+	 
+	 
 
      return $fields;
 }
@@ -51,4 +60,5 @@ add_action( 'woocommerce_admin_order_data_after_shipping_address', 'my_custom_ch
 
 function my_custom_checkout_field_display_admin_order_meta($order){
     echo '<p><strong>'.__('Phone From Checkout Form').':</strong> ' . get_post_meta( $order->get_id(), '_shipping_phone', true ) . '</p>';
+    echo '<p><strong>'.__('Planet From Checkout Form').':</strong> ' . get_post_meta( $order->get_id(), 'shipping_planet', true ) . '</p>';
 }

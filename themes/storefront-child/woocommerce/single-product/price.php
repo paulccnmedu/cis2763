@@ -43,7 +43,7 @@ if( (!is_user_logged_in())) {
 <?php
 }
 if( (is_user_logged_in())) {
-	echo number_format($discount_price,2);
+	echo '$'.number_format($discount_price,2);
 	echo '<br>Members save $'.number_format($save,2);
 }
 ?>
