@@ -28,7 +28,7 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_s
 ///////////////////////////////////////////////////////////////////////
 //in the following member price example we will edit the template file and write new functions
 //
-//As an exercise, modify this example so that we do not need to edit price.php
+//As an exercise, modify this example so that we do not need to edit the template price.php
 //hint: use filters woocommerce_get_price_html and woocommerce_cart_item_price
 //
 //woocommerce_template_single_price loads the template part file price.php
@@ -130,6 +130,8 @@ function add_custom_price( $cart_object ) {
 /////////////////////// Custom Shipping Fields ////////////////////////
 //https://docs.woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
 // add shipping phone to  the checkout page
+//https://codex.wordpress.org/Function_Reference/add_post_meta#Hidden_Custom_Fields
+//
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
 
 // Our hooked in function - $fields is passed via the filter!
@@ -161,7 +163,9 @@ add_action( 'woocommerce_admin_order_data_after_shipping_address', 'my_custom_ch
 function my_custom_checkout_field_display_admin_order_meta($order){
     echo '<p><strong>'.__('Phone From Checkout Form').':</strong> ' . get_post_meta( $order->get_id(), '_shipping_phone', true ) . '</p>';
     echo '<p><strong>'.__('Planet From Checkout Form').':</strong> ' . get_post_meta( $order->get_id(), '_shipping_planet', true ) . '</p>';
+	//echo '<p><strong>'.__('Shipping Planet').':</strong> ' . get_post_meta( $order->id, 'Shipping Planet', true ) . '</p>';
 }
+	
 /**
  * Validate shipping checkout
  */
