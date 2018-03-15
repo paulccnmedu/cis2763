@@ -131,6 +131,7 @@ function add_custom_price( $cart_object ) {
 //https://docs.woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
 // add shipping phone to  the checkout page
 //https://codex.wordpress.org/Function_Reference/add_post_meta#Hidden_Custom_Fields
+//https://docs.woocommerce.com/document/woocommerce-admin-custom-order-fields/
 //
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
 
@@ -186,4 +187,70 @@ function cis_custom_checkout_field_update_order_meta( $order_id ) {
     if ( ! empty( $_POST['shipping_planet'] ) ) {
         update_post_meta( $order_id, 'Shipping Planet', sanitize_text_field( $_POST['shipping_planet'] ) );
     }
+}
+////////////////////////////////////////////////////////////
+// search orders by product sku, product category 
+//https://stackoverflow.com/questions/37762856/extending-search-in-backend-orders-list-for-product-items-by-id-or-by-sku
+add_filter( 'woocommerce_shop_order_search_fields', function ($search_fields ) {
+    $orders = get_posts( array( 'post_type' => 'shop_order' ) );
+
+    foreach ($orders as $order_post) {
+        $order_id = $order_post->ID;
+        $order = new WC_Order($order_id);
+        $items = $order->get_items();
+
+        foreach( $order->get_items() as $item_id => $item_values ) {
+            if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+                $product_id = $item_values['product_id'];
+            } else {
+                $product_id = $item_values->get_product_id();
+            }
+            $search_sku = get_post_meta($product_id, "_sku", true);
+            add_post_meta($order_id, "_product_id", $product_id, true); //  <= ## Here ##
+            add_post_meta($order_id, "_product_sku", $search_sku, true); // <= ## Here ##
+        }
+    }
+    return array_merge($search_fields, array('_product_id', '_product_sku'));
+} );
+////////////////////////////////////////////////////////////////////////////////////
+//////////display item category in admin Orders page////
+//https://www.themelocation.com/display-item-category-orders-page/
+
+// displays item_category column
+function action_woocommerce_admin_order_item_headers(  ) 
+{ ?>
+ <th class="item sortable" colspan="2" data-sort="string-ins"><?php _e( 'Item category', 'woocommerce' ); ?></th>
+ <?php 
+};
+ 
+ 
+// define the woocommerce_admin_order_item_values callback
+// displays category name
+function action_woocommerce_admin_order_item_values( $_product, $item, $item_id ) 
+{ ?>
+ <td class="name" colspan="2" >
+  <?php
+  $termsp = get_the_terms( $_product->get_id(), 'product_cat' );
+  if(!empty($termsp)){
+  foreach ($termsp as $term) {
+   $_categoryid = $term->term_id;
+   if( $term = get_term_by( 'id', $_categoryid, 'product_cat' ) ){
+   echo $term->name .', ';
+   }
+  } } ?>
+ </td>
+<?php
+};
+ 
+// add the action
+//add_action( 'woocommerce_admin_order_item_values', 'action_woocommerce_admin_order_item_values', 10, 3 );
+add_action( 'woocommerce_admin_order_item_headers', 'action_woocommerce_admin_order_item_headers', 10, 0 );
+//////////
+//
+//https://www.skyverge.com/blog/searching-custom-fields-woocommerce-order-admin/
+// add a search field
+add_filter( 'woocommerce_shop_order_search_fields', 'woocommerce_shop_order_search_order_total' );
+function woocommerce_shop_order_search_order_total( $search_fields ) {
+$search_fields[] = '_order_total';
+return $search_fields;
 }
