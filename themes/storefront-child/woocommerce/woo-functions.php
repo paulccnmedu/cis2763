@@ -193,9 +193,14 @@ function cis_custom_checkout_field_update_order_meta( $order_id ) {
 //https://stackoverflow.com/questions/37762856/extending-search-in-backend-orders-list-for-product-items-by-id-or-by-sku
 add_filter( 'woocommerce_shop_order_search_fields', function ($search_fields ) {
     $orders = get_posts( array( 'post_type' => 'shop_order' ) );
-
+	//echo '<pre>';
+	//print_r($orders);
+	//echo '</pre>';
+	//die('orders woocommerce_shop_order_search_fields');
     foreach ($orders as $order_post) {
         $order_id = $order_post->ID;
+		//echo $order_id.'<br>';
+		//die('order_id');
         $order = new WC_Order($order_id);
         $items = $order->get_items();
 
@@ -210,7 +215,12 @@ add_filter( 'woocommerce_shop_order_search_fields', function ($search_fields ) {
             add_post_meta($order_id, "_product_sku", $search_sku, true); // <= ## Here ##
         }
     }
-    return array_merge($search_fields, array('_product_id', '_product_sku'));
+	//echo '<pre>';
+	//print_r($items);
+	//echo '</pre>';
+	//die('woocommerce_shop_order_search_fields');
+	$array2 = array('_product_id', '_product_sku');
+    return array_merge($search_fields,$array2 );
 } );
 ////////////////////////////////////////////////////////////////////////////////////
 //////////display item category in admin Orders page////
@@ -231,19 +241,31 @@ function action_woocommerce_admin_order_item_values( $_product, $item, $item_id 
  <td class="name" colspan="2" >
   <?php
   $termsp = get_the_terms( $_product->get_id(), 'product_cat' );
+  //if(is_array($termsp)) { echo 'ARRAY'; die();}
+  //if(is_object($termsp)) { echo 'OBJECT'; die();}
+  //echo '<pre>';
+  //print_r($termsp);
+  //echo '</pre>';
+  //die();
   if(!empty($termsp)){
+  $c = 0;
+  $len = count($termsp);
   foreach ($termsp as $term) {
+   $c++;
    $_categoryid = $term->term_id;
    if( $term = get_term_by( 'id', $_categoryid, 'product_cat' ) ){
-   echo $term->name .', ';
+   //echo $term->name .', ';
+   echo $term->name;
+   if($c < $len) { echo ', ';}
    }
+   
   } } ?>
  </td>
 <?php
 };
  
 // add the action
-//add_action( 'woocommerce_admin_order_item_values', 'action_woocommerce_admin_order_item_values', 10, 3 );
+add_action( 'woocommerce_admin_order_item_values', 'action_woocommerce_admin_order_item_values', 10, 3 );
 add_action( 'woocommerce_admin_order_item_headers', 'action_woocommerce_admin_order_item_headers', 10, 0 );
 //////////
 //
