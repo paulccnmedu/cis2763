@@ -188,11 +188,22 @@ function cis_custom_checkout_field_update_order_meta( $order_id ) {
         update_post_meta( $order_id, 'Shipping Planet', sanitize_text_field( $_POST['shipping_planet'] ) );
     }
 }
-////////////////////////////////////////////////////////////
-// search orders by product sku, product category 
+/*
 //https://stackoverflow.com/questions/37762856/extending-search-in-backend-orders-list-for-product-items-by-id-or-by-sku
+//https://stackoverflow.com/questions/39401393/how-to-get-woocommerce-order-details
+//https://github.com/woocommerce/woocommerce/wiki/wc_get_orders-and-WC_Order_Query
+//https://www.skyverge.com/blog/get-all-woocommerce-orders-for-a-customer/
+//https://stackoverflow.com/questions/25626058/add-extra-meta-for-orders-in-woocommerce
 add_filter( 'woocommerce_shop_order_search_fields', function ($search_fields ) {
-    $orders = get_posts( array( 'post_type' => 'shop_order' ) );
+	
+	//echo '<pre>';
+	//print_r($search_fields);
+	//echo '</pre>';
+	//die('woocommerce_shop_order_search_fields');
+	
+	
+	//$orders = get_posts( array( 'post_type' => 'shop_order' ) );
+	$orders = wc_get_orders();
 	//echo '<pre>';
 	//print_r($orders);
 	//echo '</pre>';
@@ -211,17 +222,48 @@ add_filter( 'woocommerce_shop_order_search_fields', function ($search_fields ) {
                 $product_id = $item_values->get_product_id();
             }
             $search_sku = get_post_meta($product_id, "_sku", true);
-            add_post_meta($order_id, "_product_id", $product_id, true); //  <= ## Here ##
-            add_post_meta($order_id, "_product_sku", $search_sku, true); // <= ## Here ##
+            //add_post_meta($order_id, "_product_id", $product_id, true); //  <= ## Here ##
+            //add_post_meta($order_id, "_product_sku", $search_sku, true); // <= ## Here ##
+			$order->update_meta_data( '_product_id', $product_id );
+			$order->update_meta_data( '_product_sku', $search_sku );
+			$order->save();
         }
-    }
 	//echo '<pre>';
-	//print_r($items);
+	//print_r($order);
 	//echo '</pre>';
 	//die('woocommerce_shop_order_search_fields');
+    }
 	$array2 = array('_product_id', '_product_sku');
-    return array_merge($search_fields,$array2 );
+	$search_fields = array_merge($search_fields,$array2 );
+	
+	//echo '<pre>';
+	//print_r($search_fields);
+	//echo '</pre>';
+	//die('woocommerce_shop_order_search_fields');
+	
+	
+	return $search_fields;
 } );
+*/
+////////////////////////////////////////////////////////////
+// custom search orders by product sku, product category, ....
+// save meta data fields when order is created,
+// add to search fields array with filter
+// 
+//https://stackoverflow.com/questions/25626058/add-extra-meta-for-orders-in-woocommerce
+add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
+function before_checkout_create_order( $order, $data ) {
+    foreach( $order->get_items() as $item_id => $item_values ) {
+        if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+            $product_id = $item_values['product_id'];
+        } else {
+            $product_id = $item_values->get_product_id();
+        }
+        $search_sku = get_post_meta($product_id, "_sku", true);
+		$order->update_meta_data( '_product_id', $product_id );
+		$order->update_meta_data( '_product_sku', $search_sku );
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //////////display item category in admin Orders page////
 //https://www.themelocation.com/display-item-category-orders-page/
@@ -274,5 +316,7 @@ add_action( 'woocommerce_admin_order_item_headers', 'action_woocommerce_admin_or
 add_filter( 'woocommerce_shop_order_search_fields', 'woocommerce_shop_order_search_order_total' );
 function woocommerce_shop_order_search_order_total( $search_fields ) {
 $search_fields[] = '_order_total';
+$search_fields[] = '_product_id';
+$search_fields[] = '_product_sku';
 return $search_fields;
 }
