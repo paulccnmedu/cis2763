@@ -1,3 +1,12 @@
 /*
 Theme Name: Basic Two
 */
+#wrapper {
+width: 80%;
+}
+main { 
+float: left;
+}
+#sidebar {
+float: right;
+}
