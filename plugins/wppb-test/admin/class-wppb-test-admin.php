@@ -99,5 +99,19 @@ class Wppb_Test_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppb-test-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+	function create_post_type() {
+	  register_post_type( 'acme_product',
+		array(
+		  'labels' => array(
+			'name' => __( 'Products' ),
+			'singular_name' => __( 'Product' )
+		  ),
+		  'public' => true,
+		  'has_archive' => true,
+		)
+	  );
+	}
+	
+	
 
 }
