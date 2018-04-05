@@ -159,6 +159,9 @@ class Staff_Directory {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_staff_directory_post_type' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_staff_directory_meta_fields' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'display_staff_directory_meta_fields' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'staff_directory_sort_menu' );
+
+		
 	}
 
 	/**
