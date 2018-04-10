@@ -99,5 +99,45 @@ class Staff_Directory_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+	//add_filter( 'template_include', 'staff_directory_template_chooser');
+	function staff_directory_template_chooser( $template ) {
+	 
+		//die('staff_directory_template_chooser');
+		//die($template);
+		// Post ID
+		$post_id = get_the_ID();
+		//die(get_post_type( $post_id ));
+	 
+		// For all other CPT
+		if ( get_post_type( $post_id ) != 'staff_directory' ) {
+			return $template;
+		}
+	 
+		// Else use custom template
+		if ( is_single() ) {
+			return $this->staff_directory_get_template_hierarchy( 'single' );
+		}	 
+	}
+
+	//
+	function staff_directory_get_template_hierarchy( $template ) {
+	 
+		//die('staff_directory_get_template_hierarchy');
+		//die($template);
+		//return;
+		// Get the template slug
+		$template_slug = rtrim( $template, '.php' );
+		$template = $template_slug . '.php';
+	 
+		// Check if a custom template exists in the theme folder, if not, load the plugin template file
+		if ( $theme_file = locate_template( array( 'staff_directory/' . $template ) ) ) {
+			$file = $theme_file;
+		}
+		else {
+			$file = plugin_dir_path( __FILE__ ) . 'templates/' . $template;
+		}
+	 
+		return apply_filters( 'staff_directory_template_' . $template, $file );
+	}	
 
 }
