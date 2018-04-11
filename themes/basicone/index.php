@@ -8,22 +8,25 @@
  * e.g., it puts together the home page when no home.php file exists.
  **/
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width">
-</head>
-
-<body>
- <main>
- <b>Start WordPress Loop</b><br>
- <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
- <b>Post Title:</b><?php the_title(); ?><br>
-<b>Post Content:</b><?php  the_content(); ?><br>
-<?php endwhile; else : ?>
-	<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-<?php endif; ?>
-<b>End WordPress Loop</b>
- </main>
-</body>
+	<head>
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body>
+		<div id = "wrapper">
+			<header>
+				header content here
+			</header>
+			<main>
+				main content here
+			</main>
+			<div id = "sidebar"> 
+				sidebar content here 	
+			</div>
+			<footer>
+				footer content here 
+			</footer>
+		</div> <!-- wrapper -->
+	</body>
 </html>

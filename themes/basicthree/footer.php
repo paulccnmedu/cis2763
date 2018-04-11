@@ -1,3 +1,6 @@
-<footer>this is the footer</footer>
-</body>
+			<footer>
+				footer content here 
+			</footer>
+		</div> <!-- wrapper -->
+	</body>
 </html>

@@ -116,7 +116,11 @@ class Staff_Directory_Public {
 		// Else use custom template
 		if ( is_single() ) {
 			return $this->staff_directory_get_template_hierarchy( 'single' );
-		}	 
+		}
+		if ( is_archive() ) {
+			return $this->staff_directory_get_template_hierarchy( 'archive' );
+		}
+		
 	}
 
 	//

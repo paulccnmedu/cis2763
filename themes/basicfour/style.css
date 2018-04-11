@@ -1,4 +1,29 @@
 /*
 Theme Name: Basic Four
 */
-
+#wrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+main { 
+	float: left;
+	width: 80%;
+}
+#sidebar {
+	margin-left: 80%;
+}
+footer {
+	clear: both;
+}
+/* remove primary menu list bullets */
+#menu-primary {
+  list-style-type: none;
+}
+.menu-item {
+	display: inline;
+	padding: 5px;
+}
+.menu-item a {
+	text-decoration: none;
+}
