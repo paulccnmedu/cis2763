@@ -22,7 +22,6 @@
 <fieldset class = "outer">
 <legend>Staff Directory Sort Order</legend>
 
-
  <?php 
  if ( have_posts() ) : while ( have_posts() ) : the_post(); 
  $custom = get_post_custom($post->ID);
@@ -36,3 +35,14 @@
 endif; 
 ?>
 </fieldset>
+https://jqueryui.com/sortable/<br>
+
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+</ul>

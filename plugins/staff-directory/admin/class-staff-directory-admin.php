@@ -95,8 +95,13 @@ class Staff_Directory_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		 
+		//wp_enqueue_script('jquery');
+		//wp_enqueue_script('jquery-ui-core' );
+		//wp_enqueue_script( 'jquery-ui-sortable');
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery','jquery-ui-core','jquery-ui-sortable' ), $this->version, false );
+		
 
 	}
 	public function register_staff_directory_post_type() {
@@ -115,7 +120,7 @@ class Staff_Directory_Admin {
 		//https://developer.wordpress.org/reference/functions/add_meta_box/
 		//add_meta_box(id,title,callback,screen,context,priority,callback_args)
 		add_meta_box("staff_directory_meta", "Staff Directory Details", array($this,"render_staff_directory_meta_options"), "staff_directory", "normal", "default");
-		add_meta_box("staff_directory_sort", "Staff Directory Sort", array($this,"render_staff_directory_sort"), "staff_directory_sort", "normal", "default");
+		//add_meta_box("staff_directory_sort", "Staff Directory Sort", array($this,"render_staff_directory_sort"), "staff_directory_sort", "normal", "default");
 	}
 	public function render_staff_directory_meta_options() {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/staff-directory-admin-display.php';
@@ -131,11 +136,10 @@ class Staff_Directory_Admin {
 		$staff_directory_sort_order = sanitize_text_field( $_POST['staff_directory_sort_order'] );
 		update_post_meta($post->ID, "staff_directory_sort_order", $staff_directory_sort_order);
 	
-	
-	
 	}	
 	
 	function staff_directory_sort_menu(){
+		//add_submenu_page( string $parent_slug, string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '' )
 		add_submenu_page( 'edit.php?post_type=staff_directory', 'Sort', 'Sort', 'manage_options', 'staff_directory_sort', array($this,'render_staff_directory_sort') ); 
 	}
 
