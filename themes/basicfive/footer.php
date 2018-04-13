@@ -1,4 +1,6 @@
-<footer>this is the footer</footer>
-<?php wp_footer(); ?>
-</body>
+			<footer>
+				footer content here 
+			</footer>
+		</div> <!-- wrapper -->
+	</body>
 </html>
