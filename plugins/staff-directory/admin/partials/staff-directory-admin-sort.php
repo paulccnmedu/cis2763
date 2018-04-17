@@ -19,24 +19,27 @@
 
 	
 ?>
+
 <fieldset class = "outer">
 <legend>Staff Directory Sort Order</legend>
-
+<ul id="sortable">
  <?php 
  if ( have_posts() ) : while ( have_posts() ) : the_post(); 
  $custom = get_post_custom($post->ID);
- echo '<label class="staff-directory-label">';
- echo $custom["staff_directory_first_name"][0].' ';
- echo $custom["staff_directory_last_name"][0].' ';
- echo '</label>';
- echo '<input class="staff-directory-input" type = "text" value = "'.$custom["staff_directory_sort_order"][0].'"><br>';
+ //echo '<label class="staff-directory-label">';
+ //echo $custom["staff_directory_first_name"][0].' ';
+ //echo $custom["staff_directory_last_name"][0].' ';
+ //echo '</label>';
+ //echo '<input class="staff-directory-input" type = "text" value = "'.$custom["staff_directory_sort_order"][0].'"><br>';
+ echo '<li class="ui-state-default">'.the_post_thumbnail(array(100, 100)).'</li>';
  endwhile; else : 
 	echo '<p> '._e( 'Sorry, no staff directory posts to sort.' ); 
 endif; 
 ?>
+</ul>
 </fieldset>
 https://jqueryui.com/sortable/<br>
-
+<!--
 <ul id="sortable">
   <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
   <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
@@ -46,3 +49,4 @@ https://jqueryui.com/sortable/<br>
   <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
   <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 </ul>
+-->

@@ -96,11 +96,8 @@ class Staff_Directory_Admin {
 		 * class.
 		 */
 		 
-		//wp_enqueue_script('jquery');
-		//wp_enqueue_script('jquery-ui-core' );
-		//wp_enqueue_script( 'jquery-ui-sortable');
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery','jquery-ui-core','jquery-ui-sortable' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery','jquery-ui-core','jquery-ui-sortable' ), $this->version, true );
 		
 
 	}
@@ -113,6 +110,7 @@ class Staff_Directory_Admin {
 				),
 			'public' => true,
 			'has_archive' => true,
+			'supports' => array('title', 'editor', 'thumbnail'),
 			)
 		);	
 	}
