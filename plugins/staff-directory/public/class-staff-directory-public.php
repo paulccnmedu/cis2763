@@ -72,6 +72,7 @@ class Staff_Directory_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		 //die('public style');
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/staff-directory-public.css', array(), $this->version, 'all' );
 
@@ -95,6 +96,8 @@ class Staff_Directory_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		 
+		 //die('public js');
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-public.js', array( 'jquery' ), $this->version, false );
 
