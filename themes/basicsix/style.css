@@ -1,3 +1,33 @@
 /*
 Theme Name: Basic Six
 */
+#wrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+main { 
+	float: left;
+	width: 40%;
+}
+#sidebar {
+	margin-left: 25%;
+}
+footer {
+	clear: both;
+}
+/* remove primary menu list bullets */
+#menu-primary {
+  list-style-type: none;
+}
+.menu-item {
+	display: inline;
+	padding: 5px;
+}
+.menu-item a {
+	text-decoration: none;
+}
+/* remove sidebar list items bullets */
+#sidebar {
+  list-style-type: none;
+}

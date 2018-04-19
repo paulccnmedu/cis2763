@@ -97,9 +97,10 @@ class Staff_Directory_Admin {
 		 */
 		 
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery','jquery-ui-core','jquery-ui-sortable' ), $this->version, true );
 		
-
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staff-directory-admin.js', array( 'jquery','jquery-ui-core','jquery-ui-sortable' ), $this->version, true );
+		wp_localize_script( $this->plugin_name, 'staff_directory_ajax_sort', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+		//wp_enqueue_script( $this->plugin_name);
 	}
 	public function register_staff_directory_post_type() {
 		register_post_type( 'staff_directory',
@@ -145,6 +146,7 @@ class Staff_Directory_Admin {
 		//die('render_staff_directory_sort');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/staff-directory-admin-sort.php';
 	}
-	
-
+	public function staff_directory_sort_ajax_save() {
+		die('staff_directory_sort_ajax_save');
+	}	
 }

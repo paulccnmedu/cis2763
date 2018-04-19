@@ -160,6 +160,8 @@ class Staff_Directory {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_staff_directory_meta_fields' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'display_staff_directory_meta_fields' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'staff_directory_sort_menu' );
+		//$this->loader->add_action( 'wp_ajax_staff_directory_sort_ajax_save', $plugin_admin, 'staff_directory_sort_ajax_save' );
+		
 
 		
 	}
