@@ -25,13 +25,18 @@
 <ul id="sortable">
  <?php 
  if ( have_posts() ) : while ( have_posts() ) : the_post(); 
- $custom = get_post_custom($post->ID);
+ //$custom = get_post_custom($post->ID);
  //echo '<label class="staff-directory-label">';
  //echo $custom["staff_directory_first_name"][0].' ';
  //echo $custom["staff_directory_last_name"][0].' ';
  //echo '</label>';
  //echo '<input class="staff-directory-input" type = "text" value = "'.$custom["staff_directory_sort_order"][0].'"><br>';
- echo '<li class="ui-state-default">'.the_post_thumbnail(array(100, 100)).'</li>';
+ $post_id = get_the_ID();
+ //echo '<input class="staff-directory-input" type = "text" value = "'.$post_id.'"><br>';
+ //echo '<li class="ui-state-default" id = "postid_'.$post_id.'">'.the_post_thumbnail(array(100, 100)).'</li>';
+ $id = 'id=imgid_'.$post_id;
+ echo get_the_post_thumbnail(null,array(100, 100),$id);
+ //echo '<li class="ui-state-default" id = "postid_'.$post_id.'">'.get_the_post_thumbnail(null,array(100, 100),$id).'</li>';
  endwhile; else : 
 	echo '<p> '._e( 'Sorry, no staff directory posts to sort.' ); 
 endif; 

@@ -85,11 +85,12 @@ run_staff_directory();
 //https://codex.wordpress.org/AJAX_in_Plugins
 //// ajax test /////
 */
+/*
 add_action('wp_ajax_staff_directory_ajax_sort','ajax_test');
 function ajax_test() {
-	die('ajax_test');
+	die('ajax_test...');
 }
-
+*/
 /*
 add_action( 'admin_footer', 'my_action_javascript' ); // Write our JS below here
 

@@ -34,21 +34,6 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-	 //alert('admin jQuery');
-	 //jQuery("#sortable").sortable();
-	 /*
-	 jQuery( "#sortable" ).disableSelection();
-	 
-	jQuery( "li" ).click(function() {
-	  alert( "Handler for .click() sortable called." );
-	});
-	
-	jQuery( "*" ).click(function() {
-		  //alert( "Handler for .click() * called." );
-		  alert(event.target.nodeName);
-		  alert(this.nodeName);
-		});
-		*/
 	//https://wordpress.stackexchange.com/questions/139891/save-jquery-ui-sortable-on-wordpress?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa	
 	jQuery("#sortable").sortable({
 		
@@ -56,60 +41,15 @@
 			//alert('save sortable');
 			
 			var new_order = jQuery(this).sortable('serialize');
-			
-			//jQuery.post(ajaxurl, { action: staff_directory_ajax_sort, order: new_order }, function( data ) {
-			jQuery.post(staff_directory_ajax_sort.ajaxurl, {  }, function( ) {
-				console.log('ajax sent and response received');     
-
+			//alert('new_order ' + new_order);
+			// data sent to the php function is $_POST['order']
+			// wp action is wp_ajax_staff_directory_ajax_sort
+			jQuery.post(ajaxurl, { action: 'staff_directory_ajax_sort', order: new_order }, function( data ) {
+				console.log('ajax sent and response received');  
+				alert(data);				
 			});
 			
-			
-			/*
-			//https://codex.wordpress.org/AJAX_in_Plugins
-			var data = {
-				'action': 'wp_ajax_staff_directory_sort_ajax_save',
-				'whatever': '1234'
-			};
-			alert(ajaxurl);
-			jQuery.post(ajaxurl, data, function(response) {
-				alert('Got this from the server: ' + response);
-			});			
-			*/
-			/*
-			//https://pippinsplugins.com/process-ajax-requests-correctly-in-wordpress-plugins/
-			var data = {
-				action: 'test_response',
-				post_var: 'this will be echoed back'
-			};
-			// the_ajax_script.ajaxurl is a variable that will contain the url to the ajax processing file
-			jQuery.post(ajaxurl, data, function(response) {
-				alert(response);
-			});	
-			*/
-			/*
-			//https://stackoverflow.com/questions/24274859/wordpress-ajax-function-in-child-class?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa	
-			jQuery.ajax({
-				url: ajaxurl, // Use this pre-defined variable,
-							  // instead of explicitly passing 'admin-ajax.php',
-				data: { action : 'wp_ajax_staff_directory_sort_ajax_save' },
-				success: function(data){
-					console.log(data);
-				}
-			});	
-			*/
-			
 		}
-		
-		/*
-		jQuery.ajax({
-			url: ajaxurl, // Use this pre-defined variable,
-						  // instead of explicitly passing 'admin-ajax.php',
-			data: { action : 'do_something' },
-			success: function(data){
-				console.log(data);
-			}
-		});		
-		*/
 		
 	});	
 	
