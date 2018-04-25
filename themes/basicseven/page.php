@@ -13,6 +13,7 @@
 get_header();
 ?>
 <main>
+	<b>page.php template</b><br>
 	<b>Start WordPress Loop</b><br>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 		<b>Post Title:</b><?php the_title(); ?><br>

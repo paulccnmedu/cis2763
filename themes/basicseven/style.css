@@ -1,27 +1,33 @@
 /*
 Theme Name: Basic Seven
-Description: Demonstrate HTML layout of templates and use of sidebar to support widgets
 */
-main {
+#wrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+main { 
 	float: left;
+	width: 40%;
 }
 #sidebar {
-	float: right;
+	margin-left: 25%;
 }
-main {
-	color:green;
+footer {
+	clear: both;
 }
-/* https://stackoverflow.com/questions/8554043/what-is-a-clearfix */
-.clearfix:after {
-   content: " "; /* Older browser do not support empty content */
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
+/* remove primary menu list bullets */
+#menu-primary {
+  list-style-type: none;
 }
-.my_header_menu_class ul {
-	list-style-type: none;
+.menu-item {
+	display: inline;
+	padding: 5px;
 }
-.my_header_menu_class ul li {
-	display: inline-block;
+.menu-item a {
+	text-decoration: none;
+}
+/* remove sidebar list items bullets */
+#sidebar {
+  list-style-type: none;
 }

@@ -1,46 +1,51 @@
 <?php
-function basicseven_scripts() {
+//First test if the function is already defined since we cannot have two functions
+//with the same name. Functions defined in a theme may be re-defined in a child theme.
+//child themes are the upgrade-safe way to extend themes.
 
-	// Theme stylesheet.
-	wp_enqueue_style( 'twentyseventeen-style', get_stylesheet_uri() );
+if ( ! function_exists( 'intro_enqueue_style_function' ) ) {
+	//die('A intro_enqueue_style_function');
+	function intro_enqueue_style_function() {
+		//die('B intro_enqueue_style_function');
+		//Theme stylesheet.
+		//Two steps to register and then enqueue enable de-registering in a child theme 
+		//Excessivley upgrade safe for the main stylesheet but considered a
+		//best practice for additional style sheets and espceially for script files
+		wp_register_style( 'my-style', get_stylesheet_uri() );
+		wp_enqueue_style( 'my-style');
+	}
+	
 }
-add_action( 'wp_enqueue_scripts', 'basicseven_scripts' );
-//add_action( 'wp_enqueue_scripts', 'cis_add_hello_script' );
-function cis_add_hello_script() {
-	//die('cis_add_hello_script');
-	wp_register_script(
-        'hello-script', // name the script so that you can attach other scripts and de-register, etc.
-        get_template_directory_uri() . '/assets/js/hello.js', // this is the location of the script file
-        array('jquery') // this array lists the scripts upon which your script depends
-    );
-	wp_enqueue_script('hello-script');
+
+//the function will be activated when the WordPress core executes the code for   
+//the hook do_action('wp_enqueue_scripts')
+//hooks are the coordination between the WordPress core and 
+//third party code in themes and functions
+add_action( 'wp_enqueue_scripts', 'intro_enqueue_style_function');
+/////////////////////////////////////////////////////////////////////
+////////////////// Register Menus //////////////////////////////////
+// This function will add a menu link in the dashboard. 
+// You will need to add code to the template files to display the menu on the front end
+// https://codex.wordpress.org/Function_Reference/register_nav_menu
+add_action( 'after_setup_theme', 'register_my_menu' );
+function register_my_menu() {
+  register_nav_menu( 'primary-menu',  'Primary Menu' );
 }
-function themename_widgets_init() {
+/////////////////////////////////////////////////////////////////////
+////////////////// Register Sidebar //////////////////////////////////
+// This function will add a menu link in the dashboard. 
+// You will need to add code to the template files to display the sidebar on the front end
+//https://codex.wordpress.org/Function_Reference/register_sidebar
+add_action( 'widgets_init', 'theme_slug_widgets_init' );
+function theme_slug_widgets_init() {
     register_sidebar( array(
-        'name'          => __( 'Primary Sidebar', 'theme_name' ),
-        'id'            => 'sidebar-1',
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h1 class="widget-title">',
-        'after_title'   => '</h1>',
-    ) );
- 
-    register_sidebar( array(
-        'name'          => __( 'Secondary Sidebar', 'theme_name' ),
-        'id'            => 'sidebar-2',
-        'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li></ul>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
+        'name' => __( 'Main Sidebar', 'theme-slug' ),
+        'id' => 'sidebar-1',
+        'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-slug' ),
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+	'after_widget'  => '</li>',
+	'before_title'  => '<h2 class="widgettitle">',
+	'after_title'   => '</h2>',
     ) );
 }
-add_action( 'widgets_init', 'themename_widgets_init' );
-function register_my_menus() {
-  register_nav_menus(
-    array(
-      'header-menu' => __( 'Header Menu' ),
-      'extra-menu' => __( 'Extra Menu' )
-     )
-   );
- }
- add_action( 'init', 'register_my_menus' );
+
